@@ -75,8 +75,29 @@ namespace SFML_GUI {
 
     }
 
+    // base class for UI Layouts
+    // maybe transformable?
+    class LayoutBase {
+        
+        
+    };
+
     // Create layouts to hold these components
+    namespace UI_Layouts
+    {
     
+        // we should probably define a base class for this
+        class MainMenuFlowLayout {
+            
+            
+            
+        };
+        
+    
+    
+        
+
+    }
 
 
 
