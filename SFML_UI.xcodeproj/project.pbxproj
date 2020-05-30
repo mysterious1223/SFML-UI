@@ -8,15 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		8003A4182481EEEB00896700 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8003A4172481EEEB00896700 /* main.cpp */; };
+		804831E52482B1C4008003CA /* sfml_gui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 804831E42482B1C4008003CA /* sfml_gui.cpp */; };
+		804831E72482B1CB008003CA /* sfml_gui.h in Sources */ = {isa = PBXBuildFile; fileRef = 804831E62482B1CB008003CA /* sfml_gui.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8003A4142481EEEB00896700 /* SFML_UI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SFML_UI; sourceTree = BUILT_PRODUCTS_DIR; };
 		8003A4172481EEEB00896700 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		8003A41A2481EEEB00896700 /* cute_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = cute_image.jpg; path = ../cute_image.jpg; sourceTree = "<group>"; };
-		8003A41B2481EEEB00896700 /* nice_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; name = nice_music.ogg; path = ../nice_music.ogg; sourceTree = "<group>"; };
-		8003A41C2481EEEC00896700 /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = sansation.ttf; path = ../sansation.ttf; sourceTree = "<group>"; };
-		8003A41D2481EEED00896700 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
+		8003A4232481EF3200896700 /* SFML_UI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SFML_UI.entitlements; sourceTree = "<group>"; };
+		804831DD2482A63B008003CA /* Assets */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Assets; path = SFML_UI/Assets; sourceTree = SOURCE_ROOT; };
+		804831E42482B1C4008003CA /* sfml_gui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sfml_gui.cpp; sourceTree = "<group>"; };
+		804831E62482B1CB008003CA /* sfml_gui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sfml_gui.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,9 @@
 		8003A4162481EEEB00896700 /* SFML_UI */ = {
 			isa = PBXGroup;
 			children = (
+				804831E62482B1CB008003CA /* sfml_gui.h */,
+				804831E42482B1C4008003CA /* sfml_gui.cpp */,
+				8003A4232481EF3200896700 /* SFML_UI.entitlements */,
 				8003A4172481EEEB00896700 /* main.cpp */,
 				8003A4192481EEEB00896700 /* Resources */,
 			);
@@ -58,10 +63,7 @@
 		8003A4192481EEEB00896700 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8003A41A2481EEEB00896700 /* cute_image.jpg */,
-				8003A41B2481EEEB00896700 /* nice_music.ogg */,
-				8003A41C2481EEEC00896700 /* sansation.ttf */,
-				8003A41D2481EEED00896700 /* icon.png */,
+				804831DD2482A63B008003CA /* Assets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -123,6 +125,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8003A4182481EEEB00896700 /* main.cpp in Sources */,
+				804831E72482B1CB008003CA /* sfml_gui.h in Sources */,
+				804831E52482B1C4008003CA /* sfml_gui.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,20 +224,24 @@
 		8003A4212481EEED00896700 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NWJ37Z53T7;
+				CODE_SIGN_ENTITLEMENTS = SFML_UI/SFML_UI.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		8003A4222481EEED00896700 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = NWJ37Z53T7;
+				CODE_SIGN_ENTITLEMENTS = SFML_UI/SFML_UI.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
