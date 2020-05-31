@@ -36,7 +36,7 @@ int main(int argc, char const** argv)
     SFML_GUI::GUI_items::MenuItem *button1 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
     SFML_GUI::GUI_items::MenuItem *button2 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
     
-    //button1->setCallBackFunction(print);
+    button1->setCallBackFunction(print);
     
     // Create the main window
     sf::RenderWindow window(sf::VideoMode(1280, 760), "SFML window");

@@ -23,8 +23,13 @@ GUI_Component::GUI_Component (sf::Texture* texture) : sf::Sprite (*texture)
 }
 void GUI_Component::setCallBackFunction (void (*cb)()){
     
-    this->callBackFunc = cb;
+    this->callbckPtr = cb;
     
+}
+
+GUI_Component::~GUI_Component (){
+    // no need to delete function pointer
+    //https://bytes.com/topic/c/answers/504956-do-you-have-delete-function-pointer
 }
 
 // MENU BUTTON DEF
@@ -68,11 +73,40 @@ void SFML_GUI::GUI_items::MenuItem::updateInput (float&, sf::Event * event)
         {
             this->isClicked = true;
             // we will need to eventually handle reseting
-            if (this->callBackFunc != nullptr)
-                this->callBackFunc();
+            if (this->callbckPtr != nullptr)
+                this->callbckPtr();
             
         }
         
         
     }
+}
+SFML_GUI::UI_Layouts::MainMenuFlowLayout::MainMenuFlowLayout() : Layout()
+{
+    
+}
+
+bool SFML_GUI::UI_Layouts::MainMenuFlowLayout::init (){
+    
+    
+    
+    return true;
+    
+}
+    
+void SFML_GUI::UI_Layouts::MainMenuFlowLayout::update (float&){
+    
+}
+    
+void SFML_GUI::UI_Layouts::MainMenuFlowLayout::render (sf::RenderTarget*){
+    
+}
+
+void SFML_GUI::UI_Layouts::MainMenuFlowLayout::updateInput(float &, sf::Event *){
+    
+}
+
+
+SFML_GUI::UI_Layouts::MainMenuFlowLayout::~MainMenuFlowLayout(){
+    // delete mah pointers
 }
