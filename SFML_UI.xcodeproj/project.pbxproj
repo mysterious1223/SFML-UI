@@ -15,10 +15,12 @@
 /* Begin PBXFileReference section */
 		8003A4142481EEEB00896700 /* SFML_UI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SFML_UI; sourceTree = BUILT_PRODUCTS_DIR; };
 		8003A4172481EEEB00896700 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		8003A4232481EF3200896700 /* SFML_UI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SFML_UI.entitlements; sourceTree = "<group>"; };
 		804831DD2482A63B008003CA /* Assets */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Assets; path = SFML_UI/Assets; sourceTree = SOURCE_ROOT; };
 		804831E42482B1C4008003CA /* sfml_gui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sfml_gui.cpp; sourceTree = "<group>"; };
 		804831E62482B1CB008003CA /* sfml_gui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sfml_gui.h; sourceTree = "<group>"; };
+		8058B47624848032003DD82B /* sfml-graphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-graphics.framework"; path = "../../../../../../Users/ksingh/Documents/Lib/SFML-2.5.1-macos-clang/Frameworks/sfml-graphics.framework"; sourceTree = "<group>"; };
+		8058B47824848052003DD82B /* sfml-system.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-system.framework"; path = "../../../../../../Users/ksingh/Documents/Lib/SFML-2.5.1-macos-clang/Frameworks/sfml-system.framework"; sourceTree = "<group>"; };
+		8058B47A24848070003DD82B /* libsfml-system.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-system.2.5.1.dylib"; path = "../../../../../../Users/ksingh/Documents/Lib/SFML-2.5.1-macos-clang/lib/libsfml-system.2.5.1.dylib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +39,7 @@
 			children = (
 				8003A4162481EEEB00896700 /* SFML_UI */,
 				8003A4152481EEEB00896700 /* Products */,
+				8058B47524848031003DD82B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,7 +56,6 @@
 			children = (
 				804831E62482B1CB008003CA /* sfml_gui.h */,
 				804831E42482B1C4008003CA /* sfml_gui.cpp */,
-				8003A4232481EF3200896700 /* SFML_UI.entitlements */,
 				8003A4172481EEEB00896700 /* main.cpp */,
 				8003A4192481EEEB00896700 /* Resources */,
 			);
@@ -66,6 +68,16 @@
 				804831DD2482A63B008003CA /* Assets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		8058B47524848031003DD82B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8058B47A24848070003DD82B /* libsfml-system.2.5.1.dylib */,
+				8058B47824848052003DD82B /* sfml-system.framework */,
+				8058B47624848032003DD82B /* sfml-graphics.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,9 +237,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = SFML_UI/SFML_UI.entitlements;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -237,9 +249,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = SFML_UI/SFML_UI.entitlements;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
