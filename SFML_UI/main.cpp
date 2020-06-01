@@ -36,6 +36,8 @@ int main(int argc, char const** argv)
     SFML_GUI::GUI_items::MenuItem *button1 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
     SFML_GUI::GUI_items::MenuItem *button2 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
     
+    SFML_GUI::GUI_items::MenuItem *button3 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
+    
     button1->setCallBackFunction(print);
     
     // Create the main window
@@ -46,6 +48,18 @@ int main(int argc, char const** argv)
     button2->setPosition(300, 300);
     
     
+    SFML_GUI::UI_Layouts::MainMenuFlowLayout * myLayout = new SFML_GUI::UI_Layouts::MainMenuFlowLayout (2);
+    
+    
+    myLayout->AddItem(button1);
+    myLayout->AddItem(button2);
+    //myLayout->AddItem(button3);
+    /*
+    for (int i = 0; i < myLayout->getItemCount(); i ++)
+    {
+        printf ("%s\n", myLayout->getItems()[i]->test_string.c_str());
+    }
+    */
     sf::Clock clock;
     
     // Start the game loop

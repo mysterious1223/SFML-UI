@@ -3,17 +3,7 @@
 
 using namespace SFML_GUI;
 //using namespace SFML_GUI::GUI_items;
-/*
-foo::foo ()
-{
-    
-    printf ("test\n");
-}
 
-
-void hello () {printf ("hello\n");}
- 
- */
 
 // CONSTRUCT BASE CLASS TO POINT THE TEXTURE CORRECTLY
 
@@ -45,6 +35,9 @@ SFML_GUI::GUI_items::MenuItem::MenuItem (sf::Texture* texture) : GUI_Component (
 
 bool SFML_GUI::GUI_items::MenuItem::init ()
 {
+    
+ 
+    
     this->isClicked = false;
     return true;
 }
@@ -81,9 +74,20 @@ void SFML_GUI::GUI_items::MenuItem::updateInput (float&, sf::Event * event)
         
     }
 }
-SFML_GUI::UI_Layouts::MainMenuFlowLayout::MainMenuFlowLayout() : Layout()
-{
+
+SFML_GUI::Layout::Layout () : sf::Transformable (){
     
+    //this->layoutComponents = new GUI_Component[size];
+    
+    
+    
+    
+}
+
+SFML_GUI::UI_Layouts::MainMenuFlowLayout::MainMenuFlowLayout(int size) : Layout() 
+{
+    this->menuItemsArray = new GUI_items::MenuItem * [size];
+    this->sizeOfItemArray = size;
 }
 
 bool SFML_GUI::UI_Layouts::MainMenuFlowLayout::init (){
@@ -105,8 +109,40 @@ void SFML_GUI::UI_Layouts::MainMenuFlowLayout::render (sf::RenderTarget*){
 void SFML_GUI::UI_Layouts::MainMenuFlowLayout::updateInput(float &, sf::Event *){
     
 }
+bool SFML_GUI::UI_Layouts::MainMenuFlowLayout::AddItem (GUI_Component* item){
+    
+    
+    if (this->currIncrement == this->sizeOfItemArray)
+    {
+        
+        printf ("Size of array is at LIMIT. MainMenuFlowLayout\n");
+        return false;
+    }
+    
+    
+    
+    this->menuItemsArray [this->currIncrement] = (GUI_items::MenuItem *) item;
+    this->currIncrement ++;
+    
+    //We can Position items here
+    
+    
+    return true;
+}
+
 
 
 SFML_GUI::UI_Layouts::MainMenuFlowLayout::~MainMenuFlowLayout(){
     // delete mah pointers
+    
+    if (this->menuItemsArray != nullptr)
+    {
+        for (int i = 0; i < this->sizeOfItemArray; i ++)
+        {
+            delete this->menuItemsArray [i];
+        }
+        
+        delete this->menuItemsArray;
+    }
+    
 }

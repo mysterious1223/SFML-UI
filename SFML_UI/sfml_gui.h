@@ -9,11 +9,15 @@
 #ifndef SFML_GUI_H
 #define SFML_GUI_H
 
+
+#include <array>
+
 #include <SFML/Graphics.hpp>
 
 
 //we should specify function pointers here
 typedef void (*callBackFunc)();
+
 
 
 // we will place GUI items in here
@@ -87,10 +91,9 @@ namespace SFML_GUI {
                 void updateInput (float&, sf::Event *);
         
             
-                
-            
                 ~MenuItem(){};
         
+            
             
         };
     
@@ -103,7 +106,7 @@ namespace SFML_GUI {
     class Layout : public sf::Transformable{
         public:
         
-        Layout () : sf::Transformable (){};
+        Layout ();
             
             // initial
         virtual bool init () = 0;
@@ -118,10 +121,11 @@ namespace SFML_GUI {
         virtual void updateInput (float&, sf::Event*) = 0;
         
         // add a components (initialize in this class)
-        bool AddItem (GUI_Component*);
+        virtual bool AddItem (GUI_Component*) = 0;
         
-        
-        
+        protected:
+            //GUI_Component layoutComponents [];
+            
     };
 
     // Create layouts to hold these components
@@ -132,7 +136,7 @@ namespace SFML_GUI {
         class MainMenuFlowLayout : public Layout{
             public:
             
-                MainMenuFlowLayout ();
+                MainMenuFlowLayout (int);
             
                 bool init ();
                 
@@ -142,9 +146,18 @@ namespace SFML_GUI {
             
                 void updateInput(float &, sf::Event *);
             
-                ~MainMenuFlowLayout();
+                bool AddItem (GUI_Component*);
             
-
+                GUI_items::MenuItem ** getItems () const {return menuItemsArray;}
+                int getItemCount () const {return sizeOfItemArray;}
+            
+                ~MainMenuFlowLayout();
+            private:
+                // each layout will have an array of types the will hold
+                //Stock* stockArrayPointer=new Stock[4]{Stock(args),Stock (args)};
+                GUI_items::MenuItem ** menuItemsArray = nullptr;
+                int sizeOfItemArray;
+                int currIncrement = 0;
         };
         
     
