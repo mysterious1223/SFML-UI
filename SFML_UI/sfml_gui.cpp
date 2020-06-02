@@ -26,6 +26,8 @@ GUI_Component::~GUI_Component (){
 
 SFML_GUI::GUI_items::MenuItem::MenuItem (sf::Texture* texture) : GUI_Component (texture)
 {
+    
+    
     if (!this->init ())
     {
         
@@ -36,7 +38,9 @@ SFML_GUI::GUI_items::MenuItem::MenuItem (sf::Texture* texture) : GUI_Component (
 bool SFML_GUI::GUI_items::MenuItem::init ()
 {
     
- 
+    this->callbckPtr = nullptr;
+    
+    this->setOrigin(this->getLocalBounds().width/2, this->getLocalBounds().height/2);
     
     this->isClicked = false;
     return true;
@@ -75,16 +79,16 @@ void SFML_GUI::GUI_items::MenuItem::updateInput (float&, sf::Event * event)
     }
 }
 
-SFML_GUI::Layout::Layout () : sf::Transformable (){
+SFML_GUI::Layout::Layout (const sf::Vector2f &pos) : sf::Transformable (){
     
     //this->layoutComponents = new GUI_Component[size];
     
-    
+    this->setPosition(pos);
     
     
 }
 
-SFML_GUI::UI_Layouts::MainMenuFlowLayout::MainMenuFlowLayout(int size) : Layout() 
+SFML_GUI::UI_Layouts::MainMenuFlowLayout::MainMenuFlowLayout(const int size, const sf::Vector2f &pos) : Layout(pos)
 {
     this->menuItemsArray = new GUI_items::MenuItem * [size];
     this->sizeOfItemArray = size;
@@ -102,12 +106,32 @@ void SFML_GUI::UI_Layouts::MainMenuFlowLayout::update (float&){
     
 }
     
-void SFML_GUI::UI_Layouts::MainMenuFlowLayout::render (sf::RenderTarget*){
+void SFML_GUI::UI_Layouts::MainMenuFlowLayout::render (sf::RenderTarget* target)
+{
     
+    
+    
+    if (this->menuItemsArray != nullptr)
+    {
+        for (int i = 0; i < this->sizeOfItemArray; i ++)
+        {
+            target->draw(*this->menuItemsArray[i]);
+        }
+        
+        
+    }
 }
 
-void SFML_GUI::UI_Layouts::MainMenuFlowLayout::updateInput(float &, sf::Event *){
-    
+void SFML_GUI::UI_Layouts::MainMenuFlowLayout::updateInput(float &dt, sf::Event *event){
+    if (this->menuItemsArray != nullptr)
+    {
+        for (int i = 0; i < this->sizeOfItemArray; i ++)
+        {
+            this->menuItemsArray[i]->updateInput(dt, event);
+        }
+        
+        
+    }
 }
 bool SFML_GUI::UI_Layouts::MainMenuFlowLayout::AddItem (GUI_Component* item){
     
@@ -120,16 +144,45 @@ bool SFML_GUI::UI_Layouts::MainMenuFlowLayout::AddItem (GUI_Component* item){
     }
     
     
-    
+    // a cast to the GUI Comp to make it a menuitem
     this->menuItemsArray [this->currIncrement] = (GUI_items::MenuItem *) item;
     this->currIncrement ++;
     
     //We can Position items here
+    // todo
     
+    // re position other elements to move up
+    this->rePositionElements();
+    // We will position in the center then we will add the relative path to the current position
+    
+    
+    item->setPosition(this->getPosition().x,this->getPosition().y + this->offset);
+    
+    this->offset += item->getTextureRect().height;
+    
+    //printf ("component added at x = %f, y = %f\n", item->getPosition().x, item->getPosition().y);
     
     return true;
 }
-
+void SFML_GUI::UI_Layouts::MainMenuFlowLayout::rePositionElements ()
+{
+    
+    // make sure there are elements contained
+    if (this->currIncrement > 0)
+    {
+        
+        for (int i = 0; i < this->sizeOfItemArray - 1; i ++)
+        {
+            // this isn't working properly we should fix
+            
+            //this->menuItemsArray[i]->setPosition(this->menuItemsArray[i]->getPosition().x, this->menuItemsArray[i]->getPosition().y - offset);
+            
+        }
+        
+    }
+    
+    
+}
 
 
 SFML_GUI::UI_Layouts::MainMenuFlowLayout::~MainMenuFlowLayout(){

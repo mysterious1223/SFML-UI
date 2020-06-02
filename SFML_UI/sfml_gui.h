@@ -77,6 +77,7 @@ namespace SFML_GUI {
         {
             public:
                 MenuItem (sf::Texture*);
+                
                     
                 bool init ();
                 
@@ -106,7 +107,9 @@ namespace SFML_GUI {
     class Layout : public sf::Transformable{
         public:
         
-        Layout ();
+        
+        // position
+        Layout (const sf::Vector2f &);
             
             // initial
         virtual bool init () = 0;
@@ -126,6 +129,7 @@ namespace SFML_GUI {
         protected:
             //GUI_Component layoutComponents [];
             
+            
     };
 
     // Create layouts to hold these components
@@ -135,8 +139,8 @@ namespace SFML_GUI {
         // we should probably define a base class for this
         class MainMenuFlowLayout : public Layout{
             public:
-            
-                MainMenuFlowLayout (int);
+                // size of layout and position?
+                MainMenuFlowLayout (const int,const sf::Vector2f &);
             
                 bool init ();
                 
@@ -153,11 +157,21 @@ namespace SFML_GUI {
             
                 ~MainMenuFlowLayout();
             private:
+                // move other elements up
+                void rePositionElements ();
+            
                 // each layout will have an array of types the will hold
                 //Stock* stockArrayPointer=new Stock[4]{Stock(args),Stock (args)};
                 GUI_items::MenuItem ** menuItemsArray = nullptr;
                 int sizeOfItemArray;
                 int currIncrement = 0;
+                // set the margins for the spacing between each elements
+                unsigned margins = 0;
+            
+                // current offset
+                unsigned offset = 0;
+            
+                
         };
         
     

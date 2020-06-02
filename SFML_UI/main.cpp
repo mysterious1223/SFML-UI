@@ -36,7 +36,7 @@ int main(int argc, char const** argv)
     SFML_GUI::GUI_items::MenuItem *button1 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
     SFML_GUI::GUI_items::MenuItem *button2 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
     
-    SFML_GUI::GUI_items::MenuItem *button3 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
+    //SFML_GUI::GUI_items::MenuItem *button3 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
     
     button1->setCallBackFunction(print);
     
@@ -44,11 +44,11 @@ int main(int argc, char const** argv)
     sf::RenderWindow window(sf::VideoMode(1280, 760), "SFML window");
 
 
-    button1->setPosition(100, 100);
-    button2->setPosition(300, 300);
+    //button1->setPosition(100, 100);
+    //button2->setPosition(300, 300);
     
     
-    SFML_GUI::UI_Layouts::MainMenuFlowLayout * myLayout = new SFML_GUI::UI_Layouts::MainMenuFlowLayout (2);
+    SFML_GUI::UI_Layouts::MainMenuFlowLayout * myLayout = new SFML_GUI::UI_Layouts::MainMenuFlowLayout (2, sf::Vector2f (1280/2, 760/2));
     
     
     myLayout->AddItem(button1);
@@ -71,7 +71,11 @@ int main(int argc, char const** argv)
         while (window.pollEvent(event))
         {
             float dt = time.asSeconds();
-            button1->updateInput(dt, &event);
+            
+            
+            //button1->updateInput(dt, &event);
+            myLayout->updateInput(dt, &event);
+            
             
             // Close window: exit
             if (event.type == sf::Event::Closed) {
@@ -87,10 +91,10 @@ int main(int argc, char const** argv)
         // Clear screen
         window.clear(sf::Color::Red);
 
-        button1->render(&window);
-        button2->render(&window);
+        //button1->render(&window);
+        //button2->render(&window);
         // Draw UI stuff here?
-      
+        myLayout->render(&window);
         // Update the window
         window.display();
     }
