@@ -24,10 +24,14 @@ typedef void (*callBackFunc)();
 namespace SFML_GUI {
 
 
-    
+    enum class SCREEN_POSITION_VERTICAL{
+        TOP,
+        MIDDLE,
+        BOTTOM
+    };
 
-
-
+    // this will return the screen position based on the enum. Maybe this should be placed in MainMenuLayout?
+    static constexpr sf::Vector2f getScreenPosition_vertical (SCREEN_POSITION_VERTICAL);
     
 
     // a base class for all GUI components
@@ -35,25 +39,25 @@ namespace SFML_GUI {
     {
         public:
         
-            GUI_Component (sf::Texture*);
+            GUI_Component (const sf::Texture*);
         
             // init
             virtual bool init () = 0;
             
             // update
-            virtual void update (float&) = 0;
+            virtual void update (const float&) = 0;
             
             // render
             virtual void render(sf::RenderTarget* target) = 0;
             
             // update input
-            virtual void updateInput (float&, sf::Event *) = 0;
+            virtual void updateInput (const float&, const sf::Event *) = 0;
         
         
             // the code that the component will run
             // function pointer?
             // we can use typedef also with this
-            void setCallBackFunction (callBackFunc);
+            void setOnClickCallBackFunction (callBackFunc);
         
         
             ~GUI_Component ();
@@ -62,7 +66,7 @@ namespace SFML_GUI {
         protected:
             bool isClicked;
             //void (*callBackFunc)();
-            callBackFunc callbckPtr;
+            callBackFunc clickCBPtr;
     };
 
 
@@ -76,20 +80,20 @@ namespace SFML_GUI {
         class MenuItem : public GUI_Component
         {
             public:
-                MenuItem (sf::Texture*);
+                MenuItem (const sf::Texture*);
                 
                     
                 bool init ();
                 
                 // update
-                void update (float&);
+                void update (const float&);
                 
                 // render
                 void render(sf::RenderTarget* target);
                 
                 // update input
                 // if clicked on it will call the call back function that was specified
-                void updateInput (float&, sf::Event *);
+                void updateInput (const float&, const sf::Event *);
         
             
                 ~MenuItem(){};
@@ -107,7 +111,7 @@ namespace SFML_GUI {
     class Layout : public sf::Transformable{
         public:
         
-        
+        // add explicit?
         // position
         Layout (const sf::Vector2f &);
             
@@ -115,16 +119,16 @@ namespace SFML_GUI {
         virtual bool init () = 0;
             
             // Update
-        virtual void update (float&) = 0;
+        virtual void update (const float&) = 0;
         
         // Render
         virtual void render (sf::RenderTarget*) = 0;
         
         // update input
-        virtual void updateInput (float&, sf::Event*) = 0;
+        virtual void updateInput (const float&, const sf::Event*) = 0;
         
         // add a components (initialize in this class)
-        virtual bool AddItem (GUI_Component*) = 0;
+        virtual bool AddItem (GUI_Component*, const float marginH = 0) = 0;
         
         protected:
             //GUI_Component layoutComponents [];
@@ -133,24 +137,30 @@ namespace SFML_GUI {
     };
 
     // Create layouts to hold these components
-    namespace UI_Layouts
+    namespace  UI_Layouts
     {
     
         // we should probably define a base class for this
         class MainMenuFlowLayout : public Layout{
             public:
                 // size of layout and position?
-                MainMenuFlowLayout (const int,const sf::Vector2f &);
-            
+                MainMenuFlowLayout (const unsigned,const sf::Vector2f &);
+                MainMenuFlowLayout (const unsigned,const SFML_GUI::SCREEN_POSITION_VERTICAL);
+          
                 bool init ();
                 
-                void update (float&);
+                void update (const float&);
                 
                 void render (sf::RenderTarget*);
             
-                void updateInput(float &, sf::Event *);
+                void updateInput(const float &, const sf::Event *);
             
-                bool AddItem (GUI_Component*);
+                bool AddItem (GUI_Component*, const float marginH = 0);
+            
+                // with padding?
+                //bool AddItem (GUI_Component*, const float marginW, const float marginH);
+            
+                
             
                 GUI_items::MenuItem ** getItems () const {return menuItemsArray;}
                 int getItemCount () const {return sizeOfItemArray;}
@@ -163,8 +173,8 @@ namespace SFML_GUI {
                 // each layout will have an array of types the will hold
                 //Stock* stockArrayPointer=new Stock[4]{Stock(args),Stock (args)};
                 GUI_items::MenuItem ** menuItemsArray = nullptr;
-                int sizeOfItemArray;
-                int currIncrement = 0;
+                unsigned sizeOfItemArray;
+                unsigned currIncrement = 0;
                 // set the margins for the spacing between each elements
                 unsigned margins = 0;
             
@@ -172,6 +182,8 @@ namespace SFML_GUI {
                 unsigned offset = 0;
             
                 
+                SFML_GUI::SCREEN_POSITION_VERTICAL LayoutPositon;
+            
         };
         
     

@@ -31,14 +31,18 @@ int main(int argc, char const** argv)
     
     
     sf::Texture myTexture;
-    myTexture.loadFromFile("/Volumes/Andromeda/Programming Projects/Current Working Projects/SFML/SFML_UI/SFML_UI/Assets/icon.png");
+    myTexture.loadFromFile("/Volumes/Andromeda/Programming Projects/Current Working Projects/SFML/SFML_UI/SFML_UI/Assets/Play.png");
+    
+    
+    sf::Texture myTexture2;
+    myTexture2.loadFromFile("/Volumes/Andromeda/Programming Projects/Current Working Projects/SFML/SFML_UI/SFML_UI/Assets/Quit.png");
     
     SFML_GUI::GUI_items::MenuItem *button1 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
-    SFML_GUI::GUI_items::MenuItem *button2 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
-    
+    SFML_GUI::GUI_items::MenuItem *button2 = new SFML_GUI::GUI_items::MenuItem(&myTexture2);
+    SFML_GUI::GUI_items::MenuItem *button3 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
     //SFML_GUI::GUI_items::MenuItem *button3 = new SFML_GUI::GUI_items::MenuItem(&myTexture);
     
-    button1->setCallBackFunction(print);
+    button1->setOnClickCallBackFunction((print));
     
     // Create the main window
     sf::RenderWindow window(sf::VideoMode(1280, 760), "SFML window");
@@ -48,11 +52,13 @@ int main(int argc, char const** argv)
     //button2->setPosition(300, 300);
     
     
-    SFML_GUI::UI_Layouts::MainMenuFlowLayout * myLayout = new SFML_GUI::UI_Layouts::MainMenuFlowLayout (2, sf::Vector2f (1280/2, 760/2));
+    SFML_GUI::UI_Layouts::MainMenuFlowLayout * myLayout = new SFML_GUI::UI_Layouts::MainMenuFlowLayout (3, sf::Vector2f (1280/2, 75));
     
     
-    myLayout->AddItem(button1);
+    myLayout->AddItem(button1, 200);
     myLayout->AddItem(button2);
+    myLayout->AddItem(button3);
+    
     //myLayout->AddItem(button3);
     /*
     for (int i = 0; i < myLayout->getItemCount(); i ++)
